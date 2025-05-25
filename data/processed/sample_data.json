@@ -1,0 +1,292 @@
+{
+  "users": [
+    {
+      "Nome": "Dr. Carlos Silva",
+      "CRM": 123456,
+      "UF": "SP",
+      "Email": "carlos.silva@hospital.com.br",
+      "Telefone": "(11)98765-4321",
+      "Grupo": "Grupo A",
+      "Qualificacoes": "UTI Adulto, Cardiologia",
+      "DataCertificacao": "2023-06-15",
+      "ValidadeCertificacao": "2025-06-15"
+    },
+    {
+      "Nome": "Dra. Ana Oliveira",
+      "CRM": 234567,
+      "UF": "RJ",
+      "Email": "ana.oliveira@hospital.com.br",
+      "Telefone": "(21)97654-3210",
+      "Grupo": "Grupo B",
+      "Qualificacoes": "UTI Adulto, Pneumologia",
+      "DataCertificacao": "2024-01-10",
+      "ValidadeCertificacao": "2026-01-10"
+    },
+    {
+      "Nome": "Dr. Roberto Santos",
+      "CRM": 345678,
+      "UF": "MG",
+      "Email": "roberto.santos@hospital.com.br",
+      "Telefone": "(31)96543-2109",
+      "Grupo": "Grupo A",
+      "Qualificacoes": "UTI Adulto, Neurologia",
+      "DataCertificacao": "2022-11-05",
+      "ValidadeCertificacao": "2024-11-05"
+    },
+    {
+      "Nome": "Dra. Juliana Costa",
+      "CRM": 456789,
+      "UF": "SP",
+      "Email": "juliana.costa@hospital.com.br",
+      "Telefone": "(11)95432-1098",
+      "Grupo": "Grupo C",
+      "Qualificacoes": "UTI Pediátrica, Emergência",
+      "DataCertificacao": "2023-09-20",
+      "ValidadeCertificacao": "2025-09-20"
+    },
+    {
+      "Nome": "Dr. Marcelo Lima",
+      "CRM": 567890,
+      "UF": "RJ",
+      "Email": "marcelo.lima@hospital.com.br",
+      "Telefone": "(21)94321-0987",
+      "Grupo": "Grupo B",
+      "Qualificacoes": "UTI Adulto, Nefrologia",
+      "DataCertificacao": "2024-03-15",
+      "ValidadeCertificacao": "2026-03-15"
+    },
+    {
+      "Nome": "Dra. Patricia Mendes",
+      "CRM": 678901,
+      "UF": "SP",
+      "Email": "patricia.mendes@hospital.com.br",
+      "Telefone": "(11)93210-9876",
+      "Grupo": "Grupo A",
+      "Qualificacoes": "UTI Adulto, UTI Pediátrica",
+      "DataCertificacao": "2023-05-12",
+      "ValidadeCertificacao": "2025-05-12"
+    },
+    {
+      "Nome": "Dr. Fernando Alves",
+      "CRM": 789012,
+      "UF": "MG",
+      "Email": "fernando.alves@hospital.com.br",
+      "Telefone": "(31)92109-8765",
+      "Grupo": "Grupo C",
+      "Qualificacoes": "UTI Adulto, Infectologia",
+      "DataCertificacao": "2022-08-30",
+      "ValidadeCertificacao": "2024-08-30"
+    },
+    {
+      "Nome": "Dra. Luciana Martins",
+      "CRM": 890123,
+      "UF": "SP",
+      "Email": "luciana.martins@hospital.com.br",
+      "Telefone": "(11)91098-7654",
+      "Grupo": "Grupo B",
+      "Qualificacoes": "UTI Adulto, Cardiologia",
+      "DataCertificacao": "2024-02-28",
+      "ValidadeCertificacao": "2026-02-28"
+    },
+    {
+      "Nome": "Dr. Ricardo Pereira",
+      "CRM": 901234,
+      "UF": "RJ",
+      "Email": "ricardo.pereira@hospital.com.br",
+      "Telefone": "(21)90987-6543",
+      "Grupo": "Grupo A",
+      "Qualificacoes": "UTI Adulto, Emergência",
+      "DataCertificacao": "2023-10-05",
+      "ValidadeCertificacao": "2025-10-05"
+    },
+    {
+      "Nome": "Dra. Camila Sousa",
+      "CRM": 12345,
+      "UF": "SP",
+      "Email": "camila.sousa@hospital.com.br",
+      "Telefone": "(11)90876-5432",
+      "Grupo": "Grupo C",
+      "Qualificacoes": "UTI Pediátrica, Neonatologia",
+      "DataCertificacao": "2023-07-22",
+      "ValidadeCertificacao": "2025-07-22"
+    }
+  ],
+  "shifts": [
+    {
+      "Profissional": "Dr. Carlos Silva",
+      "CRM": 123456,
+      "Previsto": 15,
+      "Realizado": 16,
+      "Saldo": 1,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dra. Ana Oliveira",
+      "CRM": 234567,
+      "Previsto": 12,
+      "Realizado": 12,
+      "Saldo": 0,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dr. Roberto Santos",
+      "CRM": 345678,
+      "Previsto": 18,
+      "Realizado": 15,
+      "Saldo": -3,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dra. Juliana Costa",
+      "CRM": 456789,
+      "Previsto": 10,
+      "Realizado": 12,
+      "Saldo": 2,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dr. Marcelo Lima",
+      "CRM": 567890,
+      "Previsto": 14,
+      "Realizado": 14,
+      "Saldo": 0,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dra. Patricia Mendes",
+      "CRM": 678901,
+      "Previsto": 16,
+      "Realizado": 14,
+      "Saldo": -2,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dr. Fernando Alves",
+      "CRM": 789012,
+      "Previsto": 12,
+      "Realizado": 13,
+      "Saldo": 1,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dra. Luciana Martins",
+      "CRM": 890123,
+      "Previsto": 15,
+      "Realizado": 15,
+      "Saldo": 0,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dr. Ricardo Pereira",
+      "CRM": 901234,
+      "Previsto": 18,
+      "Realizado": 16,
+      "Saldo": -2,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dra. Camila Sousa",
+      "CRM": 12345,
+      "Previsto": 10,
+      "Realizado": 11,
+      "Saldo": 1,
+      "Periodo": "2025-01-01 a 2025-03-31"
+    },
+    {
+      "Profissional": "Dr. Carlos Silva",
+      "CRM": 123456,
+      "Previsto": 14,
+      "Realizado": 15,
+      "Saldo": 1,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    },
+    {
+      "Profissional": "Dra. Ana Oliveira",
+      "CRM": 234567,
+      "Previsto": 12,
+      "Realizado": 10,
+      "Saldo": -2,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    },
+    {
+      "Profissional": "Dr. Roberto Santos",
+      "CRM": 345678,
+      "Previsto": 16,
+      "Realizado": 16,
+      "Saldo": 0,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    },
+    {
+      "Profissional": "Dra. Juliana Costa",
+      "CRM": 456789,
+      "Previsto": 8,
+      "Realizado": 10,
+      "Saldo": 2,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    },
+    {
+      "Profissional": "Dr. Marcelo Lima",
+      "CRM": 567890,
+      "Previsto": 14,
+      "Realizado": 12,
+      "Saldo": -2,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    },
+    {
+      "Profissional": "Dra. Patricia Mendes",
+      "CRM": 678901,
+      "Previsto": 15,
+      "Realizado": 15,
+      "Saldo": 0,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    },
+    {
+      "Profissional": "Dr. Fernando Alves",
+      "CRM": 789012,
+      "Previsto": 10,
+      "Realizado": 12,
+      "Saldo": 2,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    },
+    {
+      "Profissional": "Dra. Luciana Martins",
+      "CRM": 890123,
+      "Previsto": 14,
+      "Realizado": 14,
+      "Saldo": 0,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    },
+    {
+      "Profissional": "Dr. Ricardo Pereira",
+      "CRM": 901234,
+      "Previsto": 16,
+      "Realizado": 14,
+      "Saldo": -2,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    },
+    {
+      "Profissional": "Dra. Camila Sousa",
+      "CRM": 12345,
+      "Previsto": 8,
+      "Realizado": 9,
+      "Saldo": 1,
+      "Periodo": "2025-04-01 a 2025-04-30"
+    }
+  ],
+  "qualifications": [
+    "Nefrologia",
+    "Emergência",
+    "Neurologia",
+    "UTI Adulto",
+    "Pneumologia",
+    "Neonatologia",
+    "UTI Pediátrica",
+    "Infectologia",
+    "Cardiologia"
+  ],
+  "groups": [
+    "Grupo A",
+    "Grupo B",
+    "Grupo C"
+  ]
+}

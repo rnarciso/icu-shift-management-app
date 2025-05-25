@@ -1,0 +1,11 @@
+Nome,CRM,UF,Email,Telefone,Grupo,Qualificacoes,DataCertificacao,ValidadeCertificacao
+Dr. Carlos Silva,123456,SP,carlos.silva@hospital.com.br,(11)98765-4321,Grupo A,"UTI Adulto, Cardiologia",2023-06-15,2025-06-15
+Dra. Ana Oliveira,234567,RJ,ana.oliveira@hospital.com.br,(21)97654-3210,Grupo B,"UTI Adulto, Pneumologia",2024-01-10,2026-01-10
+Dr. Roberto Santos,345678,MG,roberto.santos@hospital.com.br,(31)96543-2109,Grupo A,"UTI Adulto, Neurologia",2022-11-05,2024-11-05
+Dra. Juliana Costa,456789,SP,juliana.costa@hospital.com.br,(11)95432-1098,Grupo C,"UTI Pediátrica, Emergência",2023-09-20,2025-09-20
+Dr. Marcelo Lima,567890,RJ,marcelo.lima@hospital.com.br,(21)94321-0987,Grupo B,"UTI Adulto, Nefrologia",2024-03-15,2026-03-15
+Dra. Patricia Mendes,678901,SP,patricia.mendes@hospital.com.br,(11)93210-9876,Grupo A,"UTI Adulto, UTI Pediátrica",2023-05-12,2025-05-12
+Dr. Fernando Alves,789012,MG,fernando.alves@hospital.com.br,(31)92109-8765,Grupo C,"UTI Adulto, Infectologia",2022-08-30,2024-08-30
+Dra. Luciana Martins,890123,SP,luciana.martins@hospital.com.br,(11)91098-7654,Grupo B,"UTI Adulto, Cardiologia",2024-02-28,2026-02-28
+Dr. Ricardo Pereira,901234,RJ,ricardo.pereira@hospital.com.br,(21)90987-6543,Grupo A,"UTI Adulto, Emergência",2023-10-05,2025-10-05
+Dra. Camila Sousa,012345,SP,camila.sousa@hospital.com.br,(11)90876-5432,Grupo C,"UTI Pediátrica, Neonatologia",2023-07-22,2025-07-22
