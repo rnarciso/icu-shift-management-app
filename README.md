@@ -1,113 +1,529 @@
-Doctor Scheduling Backend
-Backend API for doctor recertification and ICU shift scheduling application.
+# Doctor Recertification and ICU Shift Scheduling API
 
-Overview
-This backend provides a RESTful API for managing doctor recertification, preference collection, and ICU shift scheduling with optimization for 24/7 coverage, specific qualification rules, and maximizing doctor satisfaction.
+This API provides endpoints for managing doctor data, performance metrics, and generating optimized ICU shift schedules.
 
-Project Structure
-./backend/
-├── config/             # Configuration files
-├── controllers/        # Request handlers
-├── middleware/         # Express middleware
-├── models/             # Database models
-├── routes/             # API routes
-├── services/           # Business logic
-│   └── scheduler/      # Scheduling algorithm
-├── utils/              # Helper functions
-├── app.js              # Express application setup
-├── server.js           # Server entry point
-└── package.json        # Project dependencies
-Prerequisites
-Node.js (v18 or higher)
-PostgreSQL (v12 or higher)
-Setup
-Clone the repository
+## Authentication
 
-Install dependencies:
+All API endpoints are protected with JWT-based authentication. Include the JWT token in the Authorization header:
 
-cd backend
-npm install
-Create a .env file based on .env.template:
+```
+Authorization: Bearer <your_jwt_token>
+```
 
-cp .env.template .env
-Update the .env file with your database credentials and other configuration options
+### Authentication Endpoints
 
-Start the server:
+Authentication endpoints are handled by a separate module and are not documented here.
 
-npm start
-For development with auto-reload:
+## Data Management Endpoints
 
-npm run dev
-Database
-The application uses PostgreSQL with Sequelize ORM. The database schema is defined in models/database_schema.sql and is automatically initialized when the server starts.
+### Upload CSV Data
 
-API Endpoints
-Authentication
-POST /api/auth/login - User login
-POST /api/auth/register - User registration
-POST /api/auth/refresh-token - Refresh authentication token
-POST /api/auth/forgot-password - Request password reset
-POST /api/auth/reset-password - Reset password
-GET /api/auth/profile - Get user profile
-PUT /api/auth/profile - Update user profile
-Doctors
-GET /api/doctors - Get all doctors
-GET /api/doctors/:id - Get doctor by ID
-POST /api/doctors - Create doctor
-PUT /api/doctors/:id - Update doctor
-DELETE /api/doctors/:id - Delete doctor
-GET /api/doctors/:id/qualifications - Get doctor qualifications
-PUT /api/doctors/:id/qualifications - Update doctor qualifications
-GET /api/doctors/:id/availability - Get doctor availability
-PUT /api/doctors/:id/availability - Update doctor availability
-POST /api/doctors/:id/time-off - Request time off
-GET /api/doctors/:id/time-off - Get time off requests
-Admin
-GET /api/admin/dashboard - Get dashboard statistics
-GET /api/admin/qualifications - Get qualifications
-POST /api/admin/qualifications - Create qualification
-PUT /api/admin/qualifications/:id - Update qualification
-DELETE /api/admin/qualifications/:id - Delete qualification
-GET /api/admin/shift-types - Get shift types
-POST /api/admin/shift-types - Create shift type
-PUT /api/admin/shift-types/:id - Update shift type
-DELETE /api/admin/shift-types/:id - Delete shift type
-GET /api/admin/groups - Get groups
-POST /api/admin/groups - Create group
-PUT /api/admin/groups/:id - Update group
-DELETE /api/admin/groups/:id - Delete group
-GET /api/admin/time-off-requests - Get time off requests
-PUT /api/admin/time-off-requests/:id/approve - Approve time off request
-PUT /api/admin/time-off-requests/:id/reject - Reject time off request
-POST /api/admin/import - Import doctor data
-Schedules
-POST /api/schedules/generate - Generate schedule
-GET /api/schedules - Get schedule
-PUT /api/schedules/assignments/:id - Update shift assignment
-GET /api/schedules/shifts - Get shifts
-POST /api/schedules/shifts - Create shift
-PUT /api/schedules/shifts/:id - Update shift
-DELETE /api/schedules/shifts/:id - Delete shift
-GET /api/schedules/shifts/:id/requirements - Get shift requirements
-PUT /api/schedules/shifts/:id/requirements - Update shift requirements
-Preferences
-GET /api/preferences/doctors/:id - Get doctor preferences
-PUT /api/preferences/doctors/:id - Update doctor preferences
-GET /api/preferences/shift-types/:id - Get shift type preferences
-PUT /api/preferences/shift-types/:id - Update shift type preferences
-GET /api/preferences/settings - Get preference settings
-PUT /api/preferences/settings - Update preference settings
-Reports
-GET /api/reports/schedule - Get schedule report
-GET /api/reports/workload - Get doctor workload report
-GET /api/reports/qualification-coverage - Get qualification coverage report
-GET /api/reports/preference-satisfaction - Get preference satisfaction report
-GET /api/reports/export/schedule/pdf - Export schedule to PDF
-GET /api/reports/export/schedule/csv - Export schedule to CSV
-GET /api/reports/export/doctors/csv - Export doctor data to CSV
-Testing
-Run tests with:
+Upload doctor information or performance data in CSV format.
 
-npm test
-License
-This project is proprietary and confidential.
+**URL**: `/api/data/upload`  
+**Method**: `POST`  
+**Auth required**: Yes (Admin only)  
+**Content-Type**: `multipart/form-data`
+
+**Request Body**:
+- `file`: CSV file to upload
+- `dataType`: Type of data (`doctors` or `performance`)
+
+**CSV Format for Doctors**:
+```
+id,name,temi,amib,residence,tenure
+D001,Dr. John Smith,true,false,true,5
+D002,Dr. Jane Doe,false,true,false,3
+```
+
+**CSV Format for Performance**:
+```
+doctorId,month,year,expectedShifts,actualShifts
+D001,5,2025,10,8
+D002,5,2025,8,8
+```
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**:
+```json
+{
+  "message": "File uploaded and processed successfully",
+  "fileName": "doctors_1715184803000.csv",
+  "processedRecords": 10,
+  "summary": {
+    "totalRecords": 10,
+    "validRecords": 10,
+    "errorRecords": 0
+  }
+}
+```
+
+**Error Response**:
+- **Code**: 400 Bad Request
+- **Content**:
+```json
+{
+  "message": "Invalid data type specified"
+}
+```
+
+### Get Doctors List
+
+Retrieve the list of doctors from the most recently processed data.
+
+**URL**: `/api/data/doctors`  
+**Method**: `GET`  
+**Auth required**: Yes
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**:
+```json
+{
+  "data": [
+    {
+      "id": "D001",
+      "name": "Dr. John Smith",
+      "temi": true,
+      "amib": false,
+      "residence": true,
+      "tenure": 5
+    },
+    {
+      "id": "D002",
+      "name": "Dr. Jane Doe",
+      "temi": false,
+      "amib": true,
+      "residence": false,
+      "tenure": 3
+    }
+  ],
+  "metadata": {
+    "originalFile": "doctors_1715184803000.csv",
+    "processedAt": "2025-05-08T16:40:03.000Z",
+    "totalRecords": 10,
+    "validRecords": 10,
+    "errorRecords": 0
+  }
+}
+```
+
+### Get Performance Data
+
+Retrieve performance data from the most recently processed data.
+
+**URL**: `/api/data/performance`  
+**Method**: `GET`  
+**Auth required**: Yes  
+**Query Parameters**:
+- `doctorId` (optional): Filter results by doctor ID
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**:
+```json
+{
+  "data": [
+    {
+      "doctorId": "D001",
+      "month": "5",
+      "year": "2025",
+      "expectedShifts": 10,
+      "actualShifts": 8
+    },
+    {
+      "doctorId": "D002",
+      "month": "5",
+      "year": "2025",
+      "expectedShifts": 8,
+      "actualShifts": 8
+    }
+  ],
+  "metadata": {
+    "originalFile": "performance_1715184803000.csv",
+    "processedAt": "2025-05-08T16:40:03.000Z",
+    "totalRecords": 10,
+    "validRecords": 10,
+    "errorRecords": 0
+  }
+}
+```
+
+### Export Data
+
+Export doctor or performance data as CSV.
+
+**URL**: `/api/data/export/:dataType`  
+**Method**: `GET`  
+**Auth required**: Yes (Admin only)  
+**URL Parameters**:
+- `dataType`: Type of data to export (`doctors` or `performance`)
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**: CSV file download
+
+## Schedule Management Endpoints
+
+### Generate Schedule
+
+Generate a new schedule using the scheduling algorithm.
+
+**URL**: `/api/schedule/generate`  
+**Method**: `POST`  
+**Auth required**: Yes (Admin only)
+
+**Request Body**:
+```json
+{
+  "startDate": "2025-06-01T00:00:00.000Z",
+  "endDate": "2025-06-30T23:59:59.999Z",
+  "constraints": {
+    "maxConsecutiveShifts": 3,
+    "maxShiftsPerWeek": 5,
+    "maxNightShiftsPerWeek": 3,
+    "minRestHours": 12
+  }
+}
+```
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**:
+```json
+{
+  "message": "Schedule generated successfully",
+  "scheduleId": "schedule_1715184803000",
+  "statistics": {
+    "totalShifts": 60,
+    "unfilledShifts": 0,
+    "coverageRate": 1,
+    "doctorStats": {
+      "D001": {
+        "name": "Dr. John Smith",
+        "totalShifts": 10,
+        "dayShifts": 5,
+        "nightShifts": 5,
+        "weekendShifts": 4
+      }
+    },
+    "shiftTypeDistribution": {
+      "day": 30,
+      "night": 30,
+      "weekend": 8
+    }
+  },
+  "validation": {
+    "valid": true,
+    "violations": []
+  },
+  "unfilled": 0
+}
+```
+
+### Get Schedule List
+
+Retrieve a list of all schedules.
+
+**URL**: `/api/schedule`  
+**Method**: `GET`  
+**Auth required**: Yes
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**:
+```json
+{
+  "schedules": [
+    {
+      "id": "schedule_1715184803000",
+      "startDate": "2025-06-01T00:00:00.000Z",
+      "endDate": "2025-06-30T23:59:59.999Z",
+      "status": "draft",
+      "createdAt": "2025-05-08T16:40:03.000Z",
+      "modifiedAt": null,
+      "totalShifts": 60,
+      "unfilledShifts": 0
+    }
+  ]
+}
+```
+
+### Get Schedule by ID
+
+Retrieve a specific schedule by ID.
+
+**URL**: `/api/schedule/:scheduleId`  
+**Method**: `GET`  
+**Auth required**: Yes  
+**URL Parameters**:
+- `scheduleId`: ID of the schedule to retrieve
+**Query Parameters**:
+- `doctorId` (optional): Filter assignments by doctor ID
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**:
+```json
+{
+  "id": "schedule_1715184803000",
+  "startDate": "2025-06-01T00:00:00.000Z",
+  "endDate": "2025-06-30T23:59:59.999Z",
+  "constraints": {
+    "maxConsecutiveShifts": 3,
+    "maxShiftsPerWeek": 5,
+    "maxNightShiftsPerWeek": 3,
+    "minRestHours": 12
+  },
+  "schedule": {
+    "assignments": [
+      {
+        "shiftId": "shift_1",
+        "doctorId": "D001",
+        "doctorName": "Dr. John Smith",
+        "date": "2025-06-01T00:00:00.000Z",
+        "type": "day"
+      }
+    ],
+    "doctorAssignments": {
+      "D001": [
+        {
+          "shiftId": "shift_1",
+          "doctorId": "D001",
+          "doctorName": "Dr. John Smith",
+          "date": "2025-06-01T00:00:00.000Z",
+          "type": "day"
+        }
+      ]
+    },
+    "shiftCounts": {
+      "D001": {
+        "total": 10,
+        "day": 5,
+        "night": 5,
+        "weekend": 4
+      }
+    },
+    "unfilled": []
+  },
+  "statistics": {
+    "totalShifts": 60,
+    "unfilledShifts": 0,
+    "coverageRate": 1,
+    "doctorStats": {
+      "D001": {
+        "name": "Dr. John Smith",
+        "totalShifts": 10,
+        "dayShifts": 5,
+        "nightShifts": 5,
+        "weekendShifts": 4
+      }
+    },
+    "shiftTypeDistribution": {
+      "day": 30,
+      "night": 30,
+      "weekend": 8
+    }
+  },
+  "validation": {
+    "valid": true,
+    "violations": []
+  },
+  "status": "draft",
+  "createdAt": "2025-05-08T16:40:03.000Z"
+}
+```
+
+### Update Schedule
+
+Update shift assignments in a schedule.
+
+**URL**: `/api/schedule/:scheduleId`  
+**Method**: `PUT`  
+**Auth required**: Yes (Admin only)  
+**URL Parameters**:
+- `scheduleId`: ID of the schedule to update
+
+**Request Body**:
+```json
+{
+  "assignments": [
+    {
+      "shiftId": "shift_1",
+      "doctorId": "D002"
+    },
+    {
+      "shiftId": "shift_2",
+      "doctorId": "D003"
+    }
+  ]
+}
+```
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**:
+```json
+{
+  "message": "Schedule updated successfully",
+  "statistics": {
+    "totalShifts": 60,
+    "unfilledShifts": 0,
+    "coverageRate": 1,
+    "doctorStats": {
+      "D001": {
+        "name": "Dr. John Smith",
+        "totalShifts": 8,
+        "dayShifts": 4,
+        "nightShifts": 4,
+        "weekendShifts": 3
+      },
+      "D002": {
+        "name": "Dr. Jane Doe",
+        "totalShifts": 11,
+        "dayShifts": 6,
+        "nightShifts": 5,
+        "weekendShifts": 4
+      },
+      "D003": {
+        "name": "Dr. Robert Johnson",
+        "totalShifts": 11,
+        "dayShifts": 5,
+        "nightShifts": 6,
+        "weekendShifts": 4
+      }
+    },
+    "shiftTypeDistribution": {
+      "day": 30,
+      "night": 30,
+      "weekend": 8
+    }
+  },
+  "validation": {
+    "valid": true,
+    "violations": []
+  }
+}
+```
+
+### Approve Schedule
+
+Approve a draft schedule.
+
+**URL**: `/api/schedule/:scheduleId/approve`  
+**Method**: `POST`  
+**Auth required**: Yes (Admin only)  
+**URL Parameters**:
+- `scheduleId`: ID of the schedule to approve
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**:
+```json
+{
+  "message": "Schedule approved successfully",
+  "scheduleId": "schedule_1715184803000",
+  "status": "approved"
+}
+```
+
+### Publish Schedule
+
+Publish an approved schedule to doctors.
+
+**URL**: `/api/schedule/:scheduleId/publish`  
+**Method**: `POST`  
+**Auth required**: Yes (Admin only)  
+**URL Parameters**:
+- `scheduleId`: ID of the schedule to publish
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**:
+```json
+{
+  "message": "Schedule published successfully",
+  "scheduleId": "schedule_1715184803000",
+  "status": "published"
+}
+```
+
+### Export Schedule
+
+Export a schedule in PDF or CSV format.
+
+**URL**: `/api/schedule/:scheduleId/export`  
+**Method**: `GET`  
+**Auth required**: Yes  
+**URL Parameters**:
+- `scheduleId`: ID of the schedule to export
+**Query Parameters**:
+- `format`: Export format (`pdf` or `csv`)
+
+**Success Response**:
+- **Code**: 200 OK
+- **Content**: File download (PDF or CSV)
+
+## Scheduling Algorithm
+
+The scheduling algorithm is implemented in `backend/services/scheduler/algorithm.js` and follows these principles:
+
+### Core Algorithm Logic
+
+1. **Initialization**:
+   - Create an empty schedule
+   - Sort shifts by priority (weekend shifts first, then night shifts, then day shifts)
+
+2. **Shift Assignment Process**:
+   - For each shift:
+     - Find eligible doctors based on qualifications and constraints
+     - Rank eligible doctors using the prioritization rules
+     - Assign the highest-ranked doctor to the shift
+
+3. **Eligibility Criteria**:
+   - Doctor must be available for the shift
+   - Doctor must meet qualification requirements (TEMI, AMIB, residence status)
+   - Assignment must not violate any constraints
+
+4. **Prioritization and Tie-Breaking Rules**:
+   - Doctor preferences for shifts (highest priority)
+   - TEMI status (TEMI qualified doctors first)
+   - Residence status (residents first)
+   - Past performance balance (doctors who have done fewer shifts than expected first)
+   - Tenure with UTI (more experienced doctors first)
+   - Current schedule balance (doctors with fewer assigned shifts first)
+
+5. **Constraints Handling**:
+   - Maximum consecutive shifts
+   - Maximum shifts per week
+   - Maximum night shifts per week
+   - Minimum rest hours between shifts
+
+### Schedule Validation
+
+The algorithm includes a validation function that checks if the generated schedule violates any constraints:
+
+- Maximum shifts per week
+- Maximum night shifts per week
+- Minimum rest hours between shifts
+
+Any violations are reported in the validation result.
+
+## Qualification Definitions
+
+- **TEMI**: Título de Especialista em Medicina Intensiva (Specialist Title in Intensive Care Medicine)
+- **AMIB**: Associação de Medicina Intensiva Brasileira (Brazilian Intensive Care Medicine Association) certification
+- **Residence**: Doctor is currently in residence program
+
+## Error Handling
+
+All API endpoints include comprehensive error handling:
+
+- 400 Bad Request: Invalid input data
+- 401 Unauthorized: Missing or invalid authentication
+- 403 Forbidden: Insufficient permissions
+- 404 Not Found: Resource not found
+- 500 Internal Server Error: Server-side error
+
+Error responses include a message and, when applicable, detailed error information.
