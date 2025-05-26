@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "This API provides endpoints for managing doctor data, performance metrics, and generating optimized ICU shift schedules.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm run dev --prefix backend > backend-dev.log 2>&1 & npm run dev --prefix frontend > frontend-dev.log 2>&1 &"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rnarciso/icu-shift-management-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rnarciso/icu-shift-management-app/issues"
+  },
+  "homepage": "https://github.com/rnarciso/icu-shift-management-app#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
