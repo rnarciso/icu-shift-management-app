@@ -16,7 +16,6 @@ const Specialty = sequelize.define('Specialty', {
   }
 }, {
   tableName: 'specialties',
-  schema: 'app',
   timestamps: true,
   createdAt: 'created_at',
   updatedAt: 'updated_at'

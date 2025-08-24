@@ -2,6 +2,7 @@ const { sequelize } = require('./database');
 const fs = require('fs');
 const path = require('path');
 const logger = require('../utils/logger');
+const Specialty = require('../models/specialty.model');
 
 /**
  * Initialize the database schema
@@ -16,6 +17,25 @@ const initializeDatabase = async () => {
     // For SQLite, we'll skip the raw SQL schema initialization and rely on Sequelize models
     if (sequelize.getDialect() === 'sqlite') {
       logger.info('Using SQLite, skipping raw SQL schema initialization.');
+      
+      // Create initial specialties
+      await sequelize.sync();
+      
+      // Check if specialties exist, if not create them
+      const specialtyCount = await Specialty.count();
+      if (specialtyCount === 0) {
+        await Specialty.bulkCreate([
+          { name: 'UTI Adulto', description: 'Unidade de Terapia Intensiva Adulto' },
+          { name: 'UTI Pediátrica', description: 'Unidade de Terapia Intensiva Pediátrica' },
+          { name: 'UTI Neonatal', description: 'Unidade de Terapia Intensiva Neonatal' },
+          { name: 'Emergência', description: 'Atendimento de Emergência' },
+          { name: 'Cardiologia', description: 'Especialidade em Cardiologia' },
+          { name: 'Neurologia', description: 'Especialidade em Neurologia' },
+          { name: 'Pneumologia', description: 'Especialidade em Pneumologia' }
+        ]);
+        logger.info('Initial specialties created.');
+      }
+      
       return true;
     }
     
