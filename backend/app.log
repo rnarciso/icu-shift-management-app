@@ -13,3 +13,111 @@
 {"level":"error","message":"Error initializing database schema:","name":"SequelizeConnectionRefusedError","original":{"code":"ECONNREFUSED"},"parent":{"code":"ECONNREFUSED"},"service":"doctor-scheduling-api","stack":"SequelizeConnectionRefusedError\n    at Client._connectionCallback (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:133:24)\n    at Client._handleErrorWhileConnecting (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/pg/lib/client.js:336:19)\n    at Client._handleErrorEvent (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/pg/lib/client.js:346:19)\n    at Connection.emit (node:events:507:28)\n    at Socket.reportStreamError (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/pg/lib/connection.js:57:12)\n    at Socket.emit (node:events:507:28)\n    at emitErrorNT (node:internal/streams/destroy:170:8)\n    at emitErrorCloseNT (node:internal/streams/destroy:129:3)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)","timestamp":"2025-07-06 15:21:38"}
 {"level":"error","message":"Error synchronizing database models:","name":"SequelizeConnectionRefusedError","original":{"code":"ECONNREFUSED"},"parent":{"code":"ECONNREFUSED"},"service":"doctor-scheduling-api","stack":"SequelizeConnectionRefusedError\n    at Client._connectionCallback (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:133:24)\n    at Client._handleErrorWhileConnecting (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/pg/lib/client.js:336:19)\n    at Client._handleErrorEvent (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/pg/lib/client.js:346:19)\n    at Connection.emit (node:events:507:28)\n    at Socket.reportStreamError (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/pg/lib/connection.js:57:12)\n    at Socket.emit (node:events:507:28)\n    at emitErrorNT (node:internal/streams/destroy:170:8)\n    at emitErrorCloseNT (node:internal/streams/destroy:129:3)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)","timestamp":"2025-07-06 15:21:38"}
 {"level":"info","message":"SIGTERM received. Shutting down gracefully","service":"doctor-scheduling-api","timestamp":"2025-07-31 11:12:36"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:13:24"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:13:25"}
+{"level":"error","message":"Error initializing database schema: SQLITE_ERROR: near \"EXTENSION\": syntax error","name":"SequelizeDatabaseError","original":{"code":"SQLITE_ERROR","errno":1,"sql":"CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"},"parameters":{},"parent":{"code":"SQLITE_ERROR","errno":1,"sql":"CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"},"service":"doctor-scheduling-api","sql":"CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";","stack":"Error\n    at Database.<anonymous> (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/sequelize/lib/dialects/sqlite/query.js:185:27)\n    at /Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/sequelize/lib/dialects/sqlite/query.js:183:50\n    at new Promise (<anonymous>)\n    at Query.run (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/sequelize/lib/dialects/sqlite/query.js:183:12)\n    at /Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/node_modules/sequelize/lib/sequelize.js:315:28\n    at async initializeDatabase (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/config/database-init.js:30:7)\n    at async startServer (/Users/rnarciso/Documents/Coding Projects/icu-shift-management-app/backend/server.js:10:5)","timestamp":"2025-08-23 17:13:25"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:13:25"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:13:25"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:13:48"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:13:48"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:13:48"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:13:48"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:13:48"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:40"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:40"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:40"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:40"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:40"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:52"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:52"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:52"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:52"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:52"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:55"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:56"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:56"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:56"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:56"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:56"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:56"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:56"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:56"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:21:56"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:23"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:23"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:23"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:23"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:23"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:58"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:58"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:58"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:58"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:22:58"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:27:59"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:27:59"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:27:59"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:27:59"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:27:59"}
+{"level":"info","message":"::1 - - [23/Aug/2025:20:30:21 +0000] \"GET /health HTTP/1.1\" 200 54 \"-\" \"curl/8.7.1\"","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:30:21"}
+{"level":"error","message":"500 - notNull Violation: User.password_hash cannot be null - /api/auth/register - POST - ::1","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:36:49"}
+{"level":"info","message":"::1 - - [23/Aug/2025:20:36:49 +0000] \"POST /api/auth/register HTTP/1.1\" 500 1150 \"-\" \"curl/8.7.1\"","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:36:49"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:36:57"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:36:58"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:36:58"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:36:58"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:36:58"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:26"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:28"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:28"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:28"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:28"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:42"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:43"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:43"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:43"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:43"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:48"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:49"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:49"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:49"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:49"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:49"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:50"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:50"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:50"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:50"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:51"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:51"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:51"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:51"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:51"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:51"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:51"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 17:37:51"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 18:17:10"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 18:17:10"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 18:17:10"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 18:17:10"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 18:17:10"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 18:17:10"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 18:17:10"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 18:17:10"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 18:17:10"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:09:52"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:09:52"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:09:52"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:09:52"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:09:52"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:09:52"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:09:52"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:09:52"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:09:52"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:10:22"}
+{"level":"info","message":"Using in-memory database for testing","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:10:22"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:10:22"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:10:22"}
+{"level":"info","message":"Database connection established successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:10:22"}
+{"level":"info","message":"Using SQLite, skipping raw SQL schema initialization.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:10:22"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:10:22"}
+{"level":"info","message":"Server running in development mode on port 3000","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:10:22"}
+{"level":"info","message":"Database models synchronized successfully.","service":"doctor-scheduling-api","timestamp":"2025-08-23 21:10:22"}

@@ -13,6 +13,12 @@ const initializeDatabase = async () => {
     await sequelize.authenticate();
     logger.info('Database connection established successfully.');
     
+    // For SQLite, we'll skip the raw SQL schema initialization and rely on Sequelize models
+    if (sequelize.getDialect() === 'sqlite') {
+      logger.info('Using SQLite, skipping raw SQL schema initialization.');
+      return true;
+    }
+    
     // Read the SQL schema file
     const schemaPath = path.join(__dirname, '../models/database_schema.sql');
     const schemaSQL = fs.readFileSync(schemaPath, 'utf8');

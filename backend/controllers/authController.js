@@ -31,10 +31,13 @@ exports.register = async (req, res, next) => {
       return next(new ApiError('Doctor with this CRM already exists', 400));
     }
 
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Create user with doctor role by default
     const user = await User.create({
       email,
-      password,
+      password_hash: hashedPassword,
       role: 'doctor',
       is_active: true
     });

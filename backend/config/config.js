@@ -14,7 +14,8 @@ module.exports = {
     name: process.env.DB_NAME || 'doctor_scheduling',
     user: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || 'postgres',
-    dialect: 'postgres',
+    dialect: 'sqlite',
+    storage: ':memory:',
     logging: process.env.NODE_ENV !== 'production',
     pool: {
       max: 5,

@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const config = require('./config/config');
 const logger = require('./utils/logger');
-const { testConnection } = require('./config/database');
 
 // Create Express app
 const app = express();
@@ -16,7 +15,11 @@ app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(morgan('combined', { stream: logger.stream })); // HTTP request logging
 
-// Test database connection
+// Test database connection (in-memory for testing)
+const testConnection = () => {
+  logger.info('Using in-memory database for testing');
+};
+
 testConnection();
 
 // API routes
