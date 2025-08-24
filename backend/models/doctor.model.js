@@ -11,10 +11,7 @@ const Doctor = sequelize.define('Doctor', {
     type: DataTypes.UUID,
     unique: true,
     references: {
-      model: {
-        tableName: 'users',
-        schema: 'auth'
-      },
+      model: 'users',
       key: 'id'
     }
   },
@@ -43,10 +40,7 @@ const Doctor = sequelize.define('Doctor', {
   specialty_id: {
     type: DataTypes.INTEGER,
     references: {
-      model: {
-        tableName: 'specialties',
-        schema: 'app'
-      },
+      model: 'specialties',
       key: 'id'
     }
   },
@@ -67,7 +61,6 @@ const Doctor = sequelize.define('Doctor', {
   }
 }, {
   tableName: 'doctors',
-  schema: 'app',
   timestamps: true,
   createdAt: 'created_at',
   updatedAt: 'updated_at',

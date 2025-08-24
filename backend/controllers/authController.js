@@ -48,6 +48,7 @@ exports.register = async (req, res, next) => {
       name,
       crm_number,
       crm_state,
+      email,
       specialty_id: specialty,
       is_active: true
     });
