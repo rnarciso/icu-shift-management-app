@@ -6,44 +6,19 @@ const { authenticate } = require('../middleware/auth.middleware');
 
 // This is a placeholder for the actual controller
 // Will be implemented in a separate task
-const scheduleController = {
-  generateSchedule: (req, res) => {
-    res.status(501).json({ message: 'Generate schedule functionality not implemented yet' });
-  },
-  getSchedule: (req, res) => {
-    res.status(501).json({ message: 'Get schedule functionality not implemented yet' });
-  },
-  updateShiftAssignment: (req, res) => {
-    res.status(501).json({ message: 'Update shift assignment functionality not implemented yet' });
-  },
-  getShifts: (req, res) => {
-    res.status(501).json({ message: 'Get shifts functionality not implemented yet' });
-  },
-  createShift: (req, res) => {
-    res.status(501).json({ message: 'Create shift functionality not implemented yet' });
-  },
-  updateShift: (req, res) => {
-    res.status(501).json({ message: 'Update shift functionality not implemented yet' });
-  },
-  deleteShift: (req, res) => {
-    res.status(501).json({ message: 'Delete shift functionality not implemented yet' });
-  },
-  getShiftRequirements: (req, res) => {
-    res.status(501).json({ message: 'Get shift requirements functionality not implemented yet' });
-  },
-  updateShiftRequirements: (req, res) => {
-    res.status(501).json({ message: 'Update shift requirements functionality not implemented yet' });
-  }
-};
+const scheduleController = require('../controllers/scheduleController');
 
 // Generate schedule
 router.post(
   '/generate',
   authenticate,
   [
-    body('start_date').isDate().withMessage('Valid start date is required'),
-    body('end_date').isDate().withMessage('Valid end date is required'),
-    body('optimization_preference').optional().isIn(['doctor_preference', 'equal_distribution', 'qualification_priority']).withMessage('Invalid optimization preference'),
+    body('startDate').isISO8601().withMessage('Valid start date is required (ISO 8601 format)'),
+    body('endDate').isISO8601().withMessage('Valid end date is required (ISO 8601 format)'),
+    body('constraints').optional().isObject().withMessage('Constraints must be an object'),
+    body('constraints.maxConsecutiveShifts').optional().isInt({ min: 1 }).withMessage('Max consecutive shifts must be at least 1'),
+    body('constraints.minRestHours').optional().isInt({ min: 8 }).withMessage('Min rest hours must be at least 8'),
+    body('optimizationPreference').optional().isIn(['doctor_preference', 'equal_distribution', 'qualification_priority']).withMessage('Invalid optimization preference'),
     validate
   ],
   scheduleController.generateSchedule
@@ -54,9 +29,9 @@ router.get(
   '/',
   authenticate,
   [
-    query('start_date').isDate().withMessage('Valid start date is required'),
-    query('end_date').isDate().withMessage('Valid end date is required'),
-    query('doctor_id').optional().isUUID().withMessage('Valid doctor ID is required'),
+    query('startDate').isISO8601().withMessage('Valid start date is required (ISO 8601 format)'),
+    query('endDate').isISO8601().withMessage('Valid end date is required (ISO 8601 format)'),
+    query('doctorId').optional().isUUID().withMessage('Valid doctor ID is required'),
     validate
   ],
   scheduleController.getSchedule
@@ -64,88 +39,59 @@ router.get(
 
 // Update shift assignment
 router.put(
-  '/assignments/:id',
+  '/:scheduleId',
   authenticate,
   [
-    param('id').isUUID().withMessage('Valid shift assignment ID is required'),
-    body('doctor_id').isUUID().withMessage('Valid doctor ID is required'),
+    param('scheduleId').isUUID().withMessage('Valid schedule ID is required'),
+    body('assignments').isArray().withMessage('Assignments must be an array'),
     validate
   ],
-  scheduleController.updateShiftAssignment
+  scheduleController.updateSchedule
 );
 
-// Get shifts
+// Get specific schedule by ID
 router.get(
-  '/shifts',
+  '/:scheduleId',
   authenticate,
   [
-    query('date').optional().isDate().withMessage('Valid date is required'),
-    query('shift_type_id').optional().isUUID().withMessage('Valid shift type ID is required'),
+    param('scheduleId').isUUID().withMessage('Valid schedule ID is required'),
     validate
   ],
-  scheduleController.getShifts
+  scheduleController.getSchedule
 );
 
-// Create shift
-router.post(
-  '/shifts',
+// Approve schedule
+router.patch(
+  '/:scheduleId/approve',
   authenticate,
   [
-    body('shift_date').isDate().withMessage('Valid shift date is required'),
-    body('shift_type_id').isUUID().withMessage('Valid shift type ID is required'),
-    body('required_doctors').isInt({ min: 1 }).withMessage('Required doctors must be at least 1'),
+    param('scheduleId').isUUID().withMessage('Valid schedule ID is required'),
     validate
   ],
-  scheduleController.createShift
+  scheduleController.approveSchedule
 );
 
-// Update shift
-router.put(
-  '/shifts/:id',
+// Publish schedule
+router.patch(
+  '/:scheduleId/publish',
   authenticate,
   [
-    param('id').isUUID().withMessage('Valid shift ID is required'),
-    body('shift_date').optional().isDate().withMessage('Valid shift date is required'),
-    body('shift_type_id').optional().isUUID().withMessage('Valid shift type ID is required'),
-    body('required_doctors').optional().isInt({ min: 1 }).withMessage('Required doctors must be at least 1'),
+    param('scheduleId').isUUID().withMessage('Valid schedule ID is required'),
     validate
   ],
-  scheduleController.updateShift
+  scheduleController.publishSchedule
 );
 
-// Delete shift
-router.delete(
-  '/shifts/:id',
-  authenticate,
-  [
-    param('id').isUUID().withMessage('Valid shift ID is required'),
-    validate
-  ],
-  scheduleController.deleteShift
-);
-
-// Get shift requirements
+// Export schedule
 router.get(
-  '/shifts/:id/requirements',
+  '/:scheduleId/export',
   authenticate,
   [
-    param('id').isUUID().withMessage('Valid shift ID is required'),
+    param('scheduleId').isUUID().withMessage('Valid schedule ID is required'),
+    query('format').optional().isIn(['pdf', 'csv']).withMessage('Format must be either pdf or csv'),
     validate
   ],
-  scheduleController.getShiftRequirements
-);
-
-// Update shift requirements
-router.put(
-  '/shifts/:id/requirements',
-  authenticate,
-  [
-    param('id').isUUID().withMessage('Valid shift ID is required'),
-    body('qualification_ids').isArray().withMessage('Qualification IDs must be an array'),
-    body('qualification_ids.*').isUUID().withMessage('Valid qualification IDs are required'),
-    validate
-  ],
-  scheduleController.updateShiftRequirements
+  scheduleController.exportSchedule
 );
 
 module.exports = router;

@@ -1,0 +1,28 @@
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# Database Configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=doctor_scheduling
+DB_USER=postgres
+DB_PASSWORD=postgres
+
+# JWT Configuration
+JWT_SECRET=your-secret-key-change-in-production
+JWT_EXPIRES_IN=24h
+JWT_REFRESH_EXPIRES_IN=7d
+
+# Scheduler Configuration
+MIN_REST_HOURS=12
+MAX_CONSECUTIVE_SHIFTS=3
+SCHEDULE_VISIBILITY_DAYS=30
+NOTIFICATION_ADVANCE_DAYS=7
+
+# Logging Configuration
+LOG_LEVEL=info
+LOG_FILE=app.log
+
+# CORS Configuration
+CORS_ORIGIN=http://localhost:3001

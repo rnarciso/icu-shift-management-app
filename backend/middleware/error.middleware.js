@@ -31,8 +31,17 @@ const errorHandler = (err, req, res, next) => {
   error.message = err.message;
   error.statusCode = err.statusCode || 500;
 
-  // Log error
-  logger.error(`${error.statusCode} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+  // Log error with more context
+  logger.error(`${error.statusCode} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`, {
+    stack: err.stack,
+    userId: req.user ? req.user.id : null,
+    userAgent: req.headers['user-agent']
+  });
+
+  // Database errors
+  if (err.name === 'SequelizeConnectionError') {
+    error = new ApiError('Database connection error. Please try again later.', 500);
+  }
 
   // Sequelize unique constraint error
   if (err.name === 'SequelizeUniqueConstraintError') {
@@ -55,11 +64,23 @@ const errorHandler = (err, req, res, next) => {
     error = new ApiError('Your token has expired. Please log in again.', 401);
   }
 
+  // Handle cast errors (e.g., invalid ObjectId)
+  if (err.name === 'CastError') {
+    error = new ApiError('Invalid resource ID', 400);
+  }
+
+  // Handle duplicate key errors
+  if (err.code === 11000) {
+    const message = 'Duplicate field value entered';
+    error = new ApiError(message, 400);
+  }
+
   // Send response
   res.status(error.statusCode).json({
     status: error.status,
     message: error.message,
-    stack: config.server.env === 'development' ? err.stack : undefined
+    ...(config.server.env === 'development' && { stack: err.stack }),
+    ...(config.server.env === 'development' && { error: err })
   });
 };
 

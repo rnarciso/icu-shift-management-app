@@ -14,7 +14,7 @@ const validate = (req, res, next) => {
     ).join(', ');
     
     // Throw API error with validation messages
-    throw new ApiError(errorMessages, 400);
+    return next(new ApiError(`Validation failed - ${errorMessages}`, 400));
   }
   
   next();
